@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp include/Keys.h src/Snake.cpp include/Snake.h)
+set(SOURCE_FILES main.cpp include/Keys.h src/Snake.cpp include/Snake.h src/Level.cpp include/Level.h)
 
 add_executable(SFML_nauka ${SOURCE_FILES})
 

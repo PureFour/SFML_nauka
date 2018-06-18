@@ -2,6 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "include/Keys.h"
+#include "include/Snake.h"
 
 #define Width 1000
 #define Height 500
@@ -25,12 +26,15 @@ int main()
     Welcome_text.setCharacterSize(32);
     Welcome_text.setPosition(window.getSize().x/2 - Welcome_text.getGlobalBounds().width/2, window.getSize().y/2 - Welcome_text.getGlobalBounds().height/2); //setting text position
     //Creating simple square ...[]
-    sf::RectangleShape square;
+      sf::RectangleShape square;
     square.setSize(sf::Vector2f(75.0, 75.0)); //setting rectangle size to 75x75 so its a square now :)
     square.setFillColor(sf::Color::White); //color
     square.setOrigin(static_cast<float>(75.0 / 2), static_cast<float>(75.0 / 2)); //setting origin(center) of square
     square.setPosition(Width/2, Height/4); //square should be over the text
     //event initialize
+    //Initialize Snake..
+    Snake snake;
+
     sf::Event event{};
     //keys bindings..
         MyKeys key;
@@ -89,6 +93,7 @@ int main()
 
         window.draw(Welcome_text);
         window.draw(square);
+        window.draw(snake);
         window.display();
     }
     return 0;

@@ -56,6 +56,11 @@ int main()
         key.myEventType = sf::Event::KeyPressed;
         key.myKeyCode = sf::Keyboard::S;
         Keys["move_down"] = key;
+        //spawn food...
+        key.myInputType = KeyboardInput;
+        key.myEventType = sf::Event::KeyPressed;
+        key.myKeyCode = sf::Keyboard::F;
+        Keys["spawn_food"] = key;
 
     ///End of initialize...
     //Main game loop...
@@ -83,6 +88,10 @@ int main()
             {
                 snake.move("down");
             }
+            if(KeyEvent(Keys["spawn_food"], event))
+            {
+                level.generate_position();
+            }
         }
         window.clear(sf::Color::Black);
         window.draw(Welcome_text);
@@ -90,6 +99,7 @@ int main()
         snake.run();
         level.initialize();
         window.draw(level);
+        level.spawnFood(window);
         if(snake.check_Collisions())
         {
             std::cout << "You losed!" << std::endl;

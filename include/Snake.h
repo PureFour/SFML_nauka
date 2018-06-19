@@ -9,10 +9,10 @@
 class Snake : public sf::Drawable
 {
 private:
-    //snake shape
-    sf::RectangleShape snake;
+    //snake_segment shape
+    sf::RectangleShape snake_segment;
+    std::vector<sf::RectangleShape> snake;
     unsigned int score;
-protected:
     //position
     const float x;
     const float y;
@@ -27,7 +27,7 @@ protected:
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
     void snake_elongate();
 public:
-    Snake(float _x = 25, float _y = 25);
+    Snake(float _x = 250, float _y = 250);
     ~Snake();
     void run();
     const bool eatFood(const sf::RectangleShape &);

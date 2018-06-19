@@ -108,12 +108,12 @@ int main()
         window.draw(snake);
         window.draw(level);
         level.spawnFood(window);
-        //Lets make running snake :D
+        //Lets make running snake_segment :D
         snake.run();
         //Checking for collisions with walls and food :P
         if(snake.eatFood(level.getFood())) level.generate_position();
         //Updating score points...
-        Score.setString("Your score is " + std::to_string(snake.getScore()));
+        Score.setString("SCORE: " + std::to_string(snake.getScore()));
         if(snake.check_Collisions())
         {
             std::cout << "You losed!" << std::endl;

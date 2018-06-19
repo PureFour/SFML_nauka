@@ -9,6 +9,7 @@ Snake::Snake(float _x, float _y) : x(_x), y(_y)
     snake.setFillColor(sf::Color::Cyan);
    // snake.setOrigin(12.5, 12.5);
     this->vec = sf::Vector2f(25.0, 0);
+    this->score = 0;
 }
 
 Snake::~Snake() = default;
@@ -17,6 +18,8 @@ void Snake::draw(sf::RenderTarget &target, sf::RenderStates state) const
 {
     target.draw(this->snake, state);
 }
+
+unsigned int& Snake::getScore() { return this->score; }
 
 void Snake::run()
 {
@@ -56,4 +59,21 @@ const bool Snake::check_Collisions()
     if(snake.getPosition().x > (Width - velocity) || snake.getPosition().x < 0) return true;
     else if(snake.getPosition().y > (Height - velocity) || snake.getPosition().y < 0) return true;
     return false;
+}
+
+const bool Snake::eatFood(const sf::RectangleShape &food)
+{
+    if(snake.getPosition().x == food.getPosition().x && snake.getPosition().y == food.getPosition().y)
+    {
+        std::cout << "Eating food...\n";
+        score += 1;
+
+        return true;
+    }
+    return false;
+}
+
+void Snake::snake_elongate()
+{
+
 }

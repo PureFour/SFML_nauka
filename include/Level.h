@@ -24,6 +24,7 @@ public:
     const void initialize();
     const void generate_position();
     const void spawnFood(sf::RenderTarget &);
+    const sf::RectangleShape& getFood();
 };
 
 

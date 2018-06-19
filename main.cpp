@@ -21,16 +21,17 @@ int main()
     window.setFramerateLimit(10); //setting fps rate
     //Mouse object
     sf::Mouse mouse;
-    //Simple text example
+    //Main text
     sf::Font font;
     font.loadFromFile("../OpenSans-Bold.ttf");
-    sf::Text Welcome_text("Hello World",font,11);
-    Welcome_text.setCharacterSize(32);
+    sf::Text Welcome_text("SuperSnake",font,25);
+    Welcome_text.setCharacterSize(64);
     Welcome_text.setPosition(window.getSize().x/2 - Welcome_text.getGlobalBounds().width/2, window.getSize().y/2 - Welcome_text.getGlobalBounds().height/2); //setting text position
     //event initialize
     sf::Event event{};
     //Initialize level
     Level level;
+    level.initialize();
     //Initialize Snake..
     Snake snake;
     //keys bindings..
@@ -62,7 +63,14 @@ int main()
         key.myKeyCode = sf::Keyboard::F;
         Keys["spawn_food"] = key;
 
+    //initialize score information
+    sf::Text Score;
+    Score.setFont(font);
+    Score.setCharacterSize(32);
+    Score.setFillColor(sf::Color::Green);
+    Score.setPosition(Width/8, Height/8);
     ///End of initialize...
+
     //Main game loop...
     while(window.isOpen())
     {
@@ -94,17 +102,24 @@ int main()
             }
         }
         window.clear(sf::Color::Black);
+        //Draw section
         window.draw(Welcome_text);
+        window.draw(Score);
         window.draw(snake);
-        snake.run();
-        level.initialize();
         window.draw(level);
         level.spawnFood(window);
+        //Lets make running snake :D
+        snake.run();
+        //Checking for collisions with walls and food :P
+        if(snake.eatFood(level.getFood())) level.generate_position();
+        //Updating score points...
+        Score.setString("Your score is " + std::to_string(snake.getScore()));
         if(snake.check_Collisions())
         {
             std::cout << "You losed!" << std::endl;
             break;
         }
+        //
         window.display();
     }
     return 0;

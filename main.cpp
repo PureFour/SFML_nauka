@@ -18,7 +18,7 @@ int main()
     //Main window initialize
     sf::RenderWindow window;
     window.create(sf::VideoMode(Width, Height, BitsPerPixel),"Nauka-SFML");
-    window.setFramerateLimit(6); //setting fps rate
+    window.setFramerateLimit(10); //setting fps rate
     //Mouse object
     sf::Mouse mouse;
     //Simple text example

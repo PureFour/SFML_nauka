@@ -3,8 +3,8 @@
 
 Level::Level()
 {
-    this->x = 20;
-    this->y = 20;
+    this->x = 12.5;
+    this->y = 12.5;
     square.setSize(sf::Vector2f(25.0, 25.0));
     square.setPosition(x, y);
     square.setFillColor(sf::Color::White);
@@ -18,22 +18,22 @@ const void Level::initialize()
     while(square.getPosition().x < Width - 25)
     {
         squares.push_back(square);
-        square.move(30.0, 0);
+        square.move(25.0, 0);
     }
     while(square.getPosition().y < Height - 25)
     {
         squares.push_back(square);
-        square.move(0, 30.0);
+        square.move(0, 25.0);
     }
     while(square.getPosition().x > 25)
     {
         squares.push_back(square);
-        square.move(-30.0, 0);
+        square.move(-25.0, 0);
     }
     while(square.getPosition().y > 25)
     {
         squares.push_back(square);
-        square.move(0, -30.0);
+        square.move(0, -25.0);
     }
 
 }

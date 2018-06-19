@@ -25,7 +25,7 @@ protected:
     //override Drawable draw method...
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 public:
-    Snake(float _x = 500, float _y = 250);
+    Snake(float _x = 25, float _y = 25);
     ~Snake();
 
     void run();

@@ -24,9 +24,9 @@ unsigned int& Snake::getScore() { return this->score; }
 
 void Snake::run()
 {
-    for(auto &i : snake)
-        i.move(vec);
-
+    snake.front().move(vec);
+    for(int i = 1; i < snake.size(); i++)
+        snake[i].setPosition(snake[i-1].getPosition() - vec);
 }
 
 const void Snake::move(const std::string &direction)

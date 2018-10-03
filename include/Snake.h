@@ -9,9 +9,15 @@
 class Snake : public sf::Drawable
 {
 private:
-    //snake_segment shape
-    sf::RectangleShape snake_segment;
-    std::vector<sf::RectangleShape> snake;
+    //snake struct
+    struct snake
+    {
+        //snake_segment shape
+        sf::RectangleShape snake_segment;
+        //velocity vector
+        sf::Vector2f vec;
+    };
+    std::vector<struct snake> wonsz;
     unsigned int score;
     //position
     const float x;
@@ -21,8 +27,6 @@ private:
     const float size_y = 25.0;
     //velocity
     const float velocity = 25.0;
-    //directory
-    sf::Vector2f vec;
     //override Drawable draw method...
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
     void snake_elongate();

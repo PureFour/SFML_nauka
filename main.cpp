@@ -1,6 +1,8 @@
 #include <iostream> //SFML - Simple and Fast Multimedia Library ;D
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <unistd.h>
 #include "include/Level.h"
 #include "include/Keys.h"
 #include "include/Snake.h"
@@ -18,7 +20,7 @@ int main()
     //Main window initialize
     sf::RenderWindow window;
     window.create(sf::VideoMode(Width, Height, BitsPerPixel),"Nauka-SFML");
-    window.setFramerateLimit(10); //setting fps rate
+    window.setFramerateLimit(15); //setting fps rate
     //Mouse object
     sf::Mouse mouse;
     //Main text
@@ -32,6 +34,16 @@ int main()
     //Initialize level
     Level level;
     level.initialize();
+    //Initialize sounds...
+    sf::SoundBuffer eat_buffer;
+    sf::SoundBuffer lose_buffer;
+    if(!eat_buffer.loadFromFile("../resources/sound/eat-tone.wav")) perror("Sound loading error!");
+    if(!lose_buffer.loadFromFile("../resources/sound/lose-tone.wav")) perror("Sound loading error!");
+
+    sf::Sound eat_sound;
+    sf::Sound lose_sound;
+    eat_sound.setBuffer(eat_buffer);
+    lose_sound.setBuffer(lose_buffer);
     //Initialize Snake..
     Snake snake;
     //keys bindings..
@@ -108,14 +120,20 @@ int main()
         window.draw(snake);
         window.draw(level);
         level.spawnFood(window);
-        //Lets make running snake_segment :D
+        //Lets make running snake :D
         snake.run();
         //Checking for collisions with walls and food :P
-        if(snake.eatFood(level.getFood())) level.generate_position();
+        if(snake.eatFood(level.getFood()))
+        {
+            eat_sound.play();
+            level.generate_position();
+        }
         //Updating score points...
         Score.setString("SCORE: " + std::to_string(snake.getScore()));
         if(snake.check_Collisions())
         {
+            lose_sound.play();
+            sleep(1);
             std::cout << "You losed!" << std::endl;
             break;
         }
